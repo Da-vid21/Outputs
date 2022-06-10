@@ -8,4 +8,13 @@ T5
 T6	
 T7  
 T9	
+    ALAS = varietal alias
+    CROP = crop
+    CVAR = crop_variety
+    JRNL = journal reference
+    PATH = pathogen
+    PED = pedigree
+    PLAN = plant anatomy
+    PPTD = plant predisposition to disease
+    TRAT = trait
 
