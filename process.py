@@ -22,9 +22,12 @@ for current_page_index in range(number_of_pages):
         count += 1
         xref = img[0]
         image = fitz.Pixmap(pdf_file, xref)
+        
+        # If Image colorspace is unspecified or unrecognized
         if image.colorspace is None:
             image.save("{}/image{}-{}.png".format(location, current_page_index, img_index))
-
+        
+        # If the image colorspace is different than GRAY or RGB image
         elif image.colorspace not in (fitz.csGRAY.name, fitz.csRGB.name):
             print(image.colorspace)
             image = fitz.Pixmap(fitz.csRGB, image)
@@ -36,13 +39,15 @@ for current_page_index in range(number_of_pages):
         elif image.n < 5:
             image = fitz.Pixmap(fitz.csRGB, image)
             image.save("{}/image{}-{}.png".format(location, current_page_index, img_index))
-        # if it is CMYK: convert to RGB first
 
+        # Convert to RGB first
         else:
+            
             new_image = fitz.Pixmap(fitz.csRGB, image)
             new_image.save("{}/image{}-{}.png".foramt(location, current_page_index, img_index))
+# All the above is for image processing
 
-
+# This is for text processing
 out = open("out.txt", "wb")  # open text output
 for page in pdf_file:  # iterate the document pages
     text = page.get_text().encode("utf8")  # get plain text (is in UTF-8)
